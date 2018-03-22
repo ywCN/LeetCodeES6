@@ -17,23 +17,77 @@
  */
 
 /**
- * Hash Table. One-pass. O(n) Time. O(n) Space.
+ * Hash Table. One-pass. O(n) Time. O(n) Space. 
+ * assume one result
  * @param {number[]} nums
  * @param {number} target
  * @return {number[]}
  */
 var twoSum = function(nums, target) {
-    let cache = new Map();
-    for (let i = 0; i < nums.length; i++) {
-        if (cache.has(target - nums[i])) {
-            return [cache.get(target - nums[i]), i];
-        } else {
-            cache.set(nums[i], i);
-        }
+  let cache = new Map();
+  for (let i = 0; i < nums.length; i++) {
+    if (cache.has(target - nums[i])) {
+      return [cache.get(target - nums[i]), i];
+    } else {
+      cache.set(nums[i], i);
     }
-    return [-1, -1];
+  }
+  return [-1, -1];
+};
+
+/**
+ * Brute Force. two for loops. O(n^2) Time. O(1) Space.
+ * assume one result
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number[]}
+ */
+var twoSumA = function(nums, target) {
+  let cache = new Map();
+  for (let i = 0; i < nums.length; i++) {
+    for (let j = 0; j < nums.length; j++) {
+      if (nums[i] + nums[j] === target) {
+        return [i, j];
+      }
+    }
+  }
+  return [-1, -1];
+};
+
+/**
+ * Sorting with Two Pointers. O(nlogn) Time. O(n) Space.
+ * assume multiple results, return numbers, not indices
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number[]}
+ */
+var twoSumB = function(nums, target) {
+  nums.sort((a, b) => a - b);
+  let l = 0, r = nums.length - 1;
+  const res = [];
+  while (l < r) {
+    if (nums[l] + nums[r] === target) {
+      res.push([nums[l], nums[r]]);
+      while (l < r && nums[l] === nums[l+1]) l++;
+      while (l < r && nums[r] === nums[r-1]) r--;
+      l++;
+      r--;
+    } else if (nums[l] + nums[r] > target) {
+      r--;
+    } else {
+      l++;
+    }
+  }
+  return res;
 };
 
 
 console.log(twoSum([2, 7, 11, 15], 9));
 console.log(twoSum([2, 7, 11, 15], 8));
+
+console.log(twoSumA([2, 7, 11, 15], 9));
+console.log(twoSumA([2, 7, 11, 15], 8));
+
+console.log(twoSumB([2, 7, 11, -2], 9));
+console.log(twoSumB([2, 7, 11, -2], 5));
+console.log(twoSumB([2, 7, 11, -2], 8));
