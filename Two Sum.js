@@ -23,7 +23,7 @@
  * @param {number} target
  * @return {number[]}
  */
-var twoSum = function(nums, target) {
+const twoSum = (nums, target) => {
   let cache = new Map();
   for (let i = 0; i < nums.length; i++) {
     if (cache.has(target - nums[i])) {
@@ -42,7 +42,7 @@ var twoSum = function(nums, target) {
  * @param {number} target
  * @return {number[]}
  */
-var twoSumA = function(nums, target) {
+const twoSumA = (nums, target) => {
   let cache = new Map();
   for (let i = 0; i < nums.length; i++) {
     for (let j = 0; j < nums.length; j++) {
@@ -61,7 +61,7 @@ var twoSumA = function(nums, target) {
  * @param {number} target
  * @return {number[]}
  */
-var twoSumB = function(nums, target) {
+const twoSumB = (nums, target) => {
   nums.sort((a, b) => a - b);
   let l = 0, r = nums.length - 1;
   const res = [];
