@@ -1,3 +1,17 @@
+.DS_Store
+*.doc
+*.docx
+*.xlsx
+*.ini
+*.class
+*.iml
+*.pdf
+.idea/
+/out/
+/OA1Debug/
+/OA1Reasoning/
+*.lnk
+
 # Logs
 logs
 *.log
