@@ -34,7 +34,7 @@ const reverse = x => {
     x = Math.floor(x/10);
   }
   // safe >> -2^31 ~ 2^31-1
-  if (negative && -res < -Math.pow(2, 31)-1 ) return 0;
+  if (negative && -res < -Math.pow(2, 31) ) return 0;
   if (!negative && res > Math.pow(2,31)-1 ) return 0;
   return negative ? -res : res;
 };
