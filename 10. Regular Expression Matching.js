@@ -47,11 +47,11 @@
 const isMatch = (s, p) => {
   const m = s.length;
   const n = p.length;
-  const dp = new Array(m+1);
+  const dp = new Array(m+1); // container for rows
   // init a table filled with false
   for (let i = 0; i < m+1; i++) {
-    dp[i] = new Array(n+1);
-    for (let j = 0 ; j < n+1; j++) {
+    dp[i] = new Array(n+1); // container for each row
+    for (let j = 0 ; j < n+1; j++) { // fill each row with false
       dp[i][j] = false;
     }
   }
