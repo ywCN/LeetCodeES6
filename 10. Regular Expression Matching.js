@@ -45,6 +45,43 @@
  * @return {boolean}
  */
 const isMatch = (s, p) => {
+  const m = s.length;
+  const n = p.length;
+  const dp = new Array(m+1);
+  // init a table filled with false
+  for (let i = 0; i < m+1; i++) {
+    dp[i] = new Array(n+1);
+    for (let j = 0 ; j < n+1; j++) {
+      dp[i][j] = false;
+    }
+  }
+  dp[0][0] = true; // init [0][0] with true
+  /* pre-process first row except [0][0]*/
+  for (let i = 1; i < n + 1; i++) { // note n + 1
+    if (p.charAt(i - 1) === '*') {
+      dp[0][i] = dp[0][i - 2]; // take value from second left grid
+    } // else leave rest grid default
+  }
+  /* fill rest part of the table */
+  for (let i = 1; i < m + 1; i++) {
+    for (let j = 1; j < n + 1; j++) {
+      if (p.charAt(j - 1) === '.' || p.charAt(j - 1) === s.charAt(i - 1)) { // if pattern is ., just check matching
+        dp[i][j] = dp[i - 1][j - 1]; // take diagonal value, merge state
+      } else if (p.charAt(j - 1) === '*') { // if pattern is*, there are two cases to consider
+        dp[i][j] = dp[i][j - 2]; // case1: zero previous char, take from second left grid, merge state
+        if (p.charAt(j - 2) === '.' || p.charAt(j - 2) === s.charAt(i - 1)) { // case2: many previous char, but we only consider one char, so just look at previous grid
+          dp[i][j] = dp[i][j] || dp[i - 1][j]; // || to merge 3 states from 2 cases
+        }
+      } else {
+        dp[i][j] = false;
+      }
+    }
+  }
+  return dp[m][n];
+}
+
+// complicated init table
+const isMatchB = (s, p) => {
   const dp = []; // row: pattern, col: string
   const m = s.length;
   const n = p.length;
@@ -87,5 +124,8 @@ const isMatch = (s, p) => {
 
 console.log(isMatch("aab", "c*a*b"));
 console.log(isMatch("ab", ".*"));
+
+console.log(isMatchB("aab", "c*a*b"));
+console.log(isMatchB("ab", ".*"));
 
 // new file: 3/23/2018
