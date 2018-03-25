@@ -49,3 +49,5 @@ const longestCommonPrefix = strs => {
   }
   return word.substring(0, prefixLen); // prefixLen index is invalid and is 1 more than the common prefix, so no -1
 };
+
+// new file: 3/25/2018
