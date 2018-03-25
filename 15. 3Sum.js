@@ -26,7 +26,7 @@ const threeSum = nums => {
   nums.sort((a, b) => a - b); // required for skipping dup.
   for (let i = 0; i < nums.length - 2; i++) {
     // -2 for 2 more pointers
-    // if (nums[i] > 0) break; // optional optimization
+    // if (nums[i] > 0) break; // early pruning
     if (i > 0 && nums[i] == nums[i - 1]) continue; // cur and prev. >0 for avoid i-1 exception
     let l = i + 1; // l=i if each num can be used for any times
     let r = nums.length - 1;
