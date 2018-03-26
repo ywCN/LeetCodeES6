@@ -11,7 +11,8 @@
  */
 const letterCombinations = digits => {
   const res = [];
-  const letters = [
+  if (digits === null || digits.length === 0) return res; // ask input
+  const mapping = [
     '',
     '',
     'abc',
@@ -27,14 +28,45 @@ const letterCombinations = digits => {
   for (let digit of digits) {
     const size = res.length;
     for (let i = 0; i < size; i++) {
-      const toCombine = res.shift();
-      const letter = letters[parseInt(digit)];
-      for (let character of letter) {
-        res.push(toCombine + character);
+      const oldStr = res.shift();
+      const letters = mapping[parseInt(digit)];
+      for (let letter of letters) {
+        res.push(oldStr + letter);
       }
     }
   }
   if (res[0] === '') res.pop(); // for the empty case if should be [] not ['']
   return res;
 };
+
+const letterCombinationsB = digits => {
+  const res = [];
+  if (digits === null || digits.length === 0) return res; // ask input
+  const mapping = [
+    '',
+    '',
+    'abc',
+    'def',
+    'ghi',
+    'jkl',
+    'mno',
+    'pqrs',
+    'tuv',
+    'wxyz'
+  ];
+  dfs(digits, mapping, res, '', 0);
+  return res;
+};
+
+const dfs = (digits, mapping, res, state, index) => {
+  if (index === digits.length) {
+    res.push(state);
+    return;
+  }
+  const letters = mapping[parseInt(digits.charAt(index))];
+  for (let letter of letters) {
+    dfs(digits, mapping, res, state + letter, index + 1);
+  }
+};
+
 // new file: 3/25/2018
