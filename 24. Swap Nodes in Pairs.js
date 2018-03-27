@@ -30,6 +30,7 @@ const swapPairs = head => {
   return dummy.next;
 };
 
+// ->a->b->c->  =>  ->a->c->b->
 const swap = (a, b, c) => {
   b.next = c.next;
   a.next = c;
