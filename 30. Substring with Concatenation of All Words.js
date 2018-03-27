@@ -24,11 +24,7 @@ const findSubstring = (s, words) => {
   const len = words[0].length; // length of each word is same
   const count = new Map();
   for (let word of words) {
-    if (count.has(word)) {
-      count.set(word, count.get(word) + 1);
-    } else {
-      count.set(word, 1); // Note: 1 NOT 0
-    }
+    count.set(word, count.has(word) ? count.get(word) + 1 : 1); // Note: 1 NOT 0
   }
   for (let i = 0; i <= s.length - len * words.length; i++) {
     const copy = new Map(count); // try to reduce copied map size
