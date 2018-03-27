@@ -9,7 +9,7 @@
  * @return {number}
  */
 const strStr = (a, b) => {
-  if (!b || b.length == 0) return 0;
+  if (!b || b.length === 0) return 0;
   let m = a.length;
   let n = b.length;
   for (let i = 0; i < m - n + 1; i++) {
