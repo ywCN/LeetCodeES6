@@ -40,7 +40,7 @@ const reverseKGroup = (head, k) => {
   dummy.next = head; // for return
   let begin = dummy; // begin is the node before each group of k nodes
   for (let i = 1; head; i++) {
-    // i=1 for its 0 based index, but we need to count
+    // i=1 for we need to count nodes
     if (i % k !== 0) {
       // not a product of k, so move pointer
       head = head.next;
