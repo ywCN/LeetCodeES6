@@ -17,11 +17,14 @@ class ListNode {
  */
 const mergeKLists = lists => {
   if (lists === null || lists.length === 0) return [];
-  return divide(lists, 0, lists.length - 1) || [];
+  return divide(lists, 0, lists.length - 1);
 };
 
-// Tree will build up until unable to split the lists[], then merging starts.
-// Each node of tree can merge 2 lists(including merged) then return a root as the result.
+/**
+ * Tree will build up until unable to split the lists[], then merging starts.
+ * Each node of tree can merge 2 lists(including merged) then return a root as the result.
+ * This is like each time we merge half of all current lists.
+ */
 const divide = (lists, left, right) => {
   if (left === right) return lists[left];
   const mid = Math.floor((right + left) / 2); // Note the floor
@@ -49,6 +52,24 @@ const merge = (l1, l2) => {
   if (l1) cur.next = l1;
   if (l2) cur.next = l2;
   return dummy.next;
+};
+
+//Brute force. Time: O(nk). Space: O(nk)
+const mergeKListsB = lists => {
+  const nodes = [];
+  const dummy = new ListNode(0);
+  lists.forEach(node => {
+    while (node) {
+      nodes.push(new ListNode(node.val));
+      node = node.next;
+    }
+  });
+  nodes.sort((a, b) => a.val - b.val);
+  dummy.next = nodes[0];
+  for (let i = 1; nodes.length && i < nodes.length; i++) {
+    nodes[i - 1].next = nodes[i];
+  }
+  return dummy.next || [];
 };
 
 // new file: 3/26/2018
