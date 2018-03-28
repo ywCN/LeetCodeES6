@@ -40,9 +40,11 @@ const countAndSay = n => {
 
 /**
  * variant1: output next 'say'
+ * input String, output next String
+ * @param {string} s
+ * @return {string}
  */
 const countAndSayB = s => {
-  // input String, output next String
   let next = '';
   for (let i = 0; i < s.length; i++) {
     let count = 1; //since i stops at last dup, count needs starts at 1
