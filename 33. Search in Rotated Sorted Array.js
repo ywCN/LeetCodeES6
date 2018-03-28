@@ -48,6 +48,25 @@ const findMin = nums => {
   return l; // or r
 };
 
+const searchB = (nums, target) => {
+  if (!nums || !nums.length) return -1;
+  let l = 0;
+  let r = nums.length - 1;
+  while (l < r) {
+    let m = Math.floor((r + l) / 2);
+    if (nums[m] >= nums[l]) {
+      if (target <= nums[m] && target >= nums[l])
+        r = m; // in this range
+      else l = m + 1; // not in this range
+    } else {
+      if (target > nums[m] && target <= nums[r])
+        l = m + 1; // not in this range
+      else r = m; // in this range
+    }
+  }
+  return nums[l] == target ? l : -1;
+};
+
 // built-in function
 const searchC = (nums, target) => {
   return nums.indexOf(target);
