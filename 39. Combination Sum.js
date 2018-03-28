@@ -29,6 +29,7 @@ const combinationSum = (nums, target) => {
   return res;
 };
 
+// try to reduce remain from target to 0
 const backtrack = (res, temp, nums, remain, start) => {
   if (remain < 0) {
     return;
