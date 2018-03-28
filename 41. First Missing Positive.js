@@ -67,5 +67,20 @@ const firstMissingPositive = nums => {
  * @param {number[]} nums
  * @return {number}
  */
-const firstMissingPositiveB = nums => {};
+const firstMissingPositiveB = nums => {
+  if (!nums || !nums.length) return 1;
+  let n = nums.length;
+  for (let i = 0; i < n; i++) {
+    /*keep swapping until value at i is at correct position or out of valid range*/
+    while (nums[i] <= n && nums[i] > 0 && nums[i] != nums[nums[i] - 1]) {
+      let temp = nums[nums[i] - 1];
+      nums[nums[i] - 1] = nums[i];
+      nums[i] = temp;
+    }
+  }
+  for (let i = 0; i < n; i++) {
+    if (nums[i] != i + 1) return i + 1; // found missing
+  }
+  return n + 1; // nothing in middle is missing, return largest
+};
 // new file: 3/28/2018
