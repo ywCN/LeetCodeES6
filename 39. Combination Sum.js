@@ -45,4 +45,6 @@ const backtrack = (res, temp, nums, remain, start) => {
   }
 };
 
+console.log(combinationSum([2, 3, 6, 7], 7));
+
 // new file: 3/28/2018
