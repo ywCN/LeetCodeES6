@@ -35,6 +35,7 @@ const backtrack = (res, temp, nums, remain, start) => {
     return;
   } else if (remain === 0) {
     res.push([...temp]); // O(k) time to copy
+    return; // important
   } else {
     for (let i = start; i < nums.length; i++) {
       temp.push(nums[i]);
