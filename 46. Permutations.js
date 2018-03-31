@@ -22,7 +22,7 @@ const permute = nums => {
 const dfs = (res, temp, nums) => {
   if (temp.length === nums.length) {
     res.push([...temp]);
-    return;
+    return; // optional optmization
   }
   for (let i = 0; i < nums.length; i++) {
     if (temp.includes(nums[i])) continue;
