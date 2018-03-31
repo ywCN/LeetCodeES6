@@ -15,6 +15,7 @@
  */
 const permute = nums => {
   const res = [];
+  // no need to sort nums because all numbers are distinct
   dfs(res, [], nums);
   return res;
 };
