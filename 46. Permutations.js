@@ -8,7 +8,7 @@
 /**
  * https://github.com/Deadbeef-ECE/Interview/blob/master/Leetcode/BackTracking/046_Permutations.java
  * O(n*n!) time: number of answers: n!, length of each answer: n, so O(n*n!) running time
- *      List.contains() costs O(n), so can use Set to reduce complexity
+ *      Array.includes() costs O(n), so can use Set to reduce complexity
  * O(n) space:one n for recursion stack, one n for status bool array, one n for new array list?
  * @param {number[]} nums
  * @return {number[][]}
