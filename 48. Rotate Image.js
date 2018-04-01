@@ -53,4 +53,26 @@ const rotate = matrix => {
   // }
 };
 
+/**
+ * not in place
+ * transpose into a new matrix, then rewrite on the input
+ */
+const rotateB = matrix => {
+  const n = matrix.length;
+  const trans = [];
+  for (let i = 0; i < n; i++) {
+    trans.push([]);
+  }
+  for (let i = 0; i < n; i++) {
+    for (let j = 0; j < n; j++) {
+      trans[j][n - 1 - i] = matrix[i][j];
+    }
+  }
+  for (let i = 0; i < n; i++) {
+    for (let j = 0; j < n; j++) {
+      matrix[i][j] = trans[i][j];
+    }
+  }
+};
+
 // new file: 4/1/2018
