@@ -15,7 +15,7 @@
  */
 const permuteUnique = nums => {
   const res = [];
-  nums.sort((a, b) => a - b); // sort to skip dups
+  nums.sort((a, b) => a - b); // sort to skip dups // [i - 1] === [i] only works for sorted or distinct array elements
   dfs(res, [], nums, new Array(nums.length).fill(false));
   return res;
 };
@@ -27,7 +27,7 @@ const dfs = (res, temp, nums, used) => {
   }
   for (let i = 0; i < nums.length; i++) {
     if (used[i]) continue;
-    if (i > 0 && nums[i - 1] === nums[i] && !used[i - 1]) continue; // [i - 1] === [i] only works for sorted or distinct array elements
+    if (!used[i - 1] && i > 0 && nums[i - 1] === nums[i]) continue; // if prev is not used and === next, skip
     used[i] = true;
     temp.push(nums[i]);
     dfs(res, temp, nums, used);
