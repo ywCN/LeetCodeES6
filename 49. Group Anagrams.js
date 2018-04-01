@@ -10,12 +10,32 @@
  *
  * Note: All inputs will be in lower-case.
  */
+
+/**
+ * O(mnlogn) time, O(m) space, m is the num of strings, n is the length of strs
+ * use Map, key is the sorted word, value is a List of unsorted words
+ * Anagram is the result of rearranging the letters of a word.
+ * @param {string[]} strs
+ * @return {string[][]}
+ */
+const groupAnagrams = strs => {
+  const groups = new Map();
+  for (let str of strs) {
+    const key = [...str].sort().join('');
+    if (!groups.has(key)) {
+      groups.set(key, []);
+    }
+    groups.get(key).push(str);
+  }
+  return [...groups.values()];
+};
+
 /**
  * hash+counting sort: O(mn) time, O(m) space, m is the num of strs, n is the length of strs
  * @param {string[]} strs
  * @return {string[][]}
  */
-const groupAnagrams = strs => {
+const groupAnagramsB = strs => {
   const groups = new Map();
   const count = new Map();
   for (let i = 0; i < 26; i++) {
