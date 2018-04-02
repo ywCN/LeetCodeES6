@@ -51,7 +51,7 @@ const merge = intervals => {
  * total non-overlapping time is the total time after merging
  */
 const totalTime = intervals => {
-  if (!intervals || !intervals.length < 1) return 0; // ask input
+  if (!intervals || !intervals.length) return 0; // ask input
   intervals.sort((a, b) => a.start - b.start);
   let total = 0;
   let prev = new Interval(0, 0); // zero length interval to init
@@ -66,5 +66,29 @@ const totalTime = intervals => {
   }
   return total;
 };
+
+/**
+ * variant 2: if the format of intervals are "March, 2014" etc, first convert it to "201403" by "2014" + "03"(hashmap:March->03)
+ * or first convert it to 2014 * 12 + 3, if the output is num of months.
+ */
+
+const test1 = [
+  new Interval(15, 18),
+  new Interval(1, 3),
+  new Interval(8, 10),
+  new Interval(2, 6)
+];
+
+console.log(merge(test1));
+
+const test2 = [
+  new Interval(15, 18),
+  new Interval(1, 3),
+  new Interval(8, 10),
+  new Interval(2, 6),
+  new Interval(16, 17)
+];
+
+console.log(totalTime(test2));
 
 // new file: 4/2/2018
