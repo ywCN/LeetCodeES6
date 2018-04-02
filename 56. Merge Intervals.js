@@ -46,11 +46,11 @@ const merge = intervals => {
 };
 
 /**
+ * O(NlogN) Time.
  * variant 1: input is unsorted and has overlapping intervals, output is total non-overlapping time
  * total non-overlapping time is the total time after merging
  */
 const totalTime = intervals => {
-  // O(NlogN) Time.
   if (!intervals || !intervals.length < 1) return 0; // ask input
   intervals.sort((a, b) => a.start - b.start);
   let total = 0;
