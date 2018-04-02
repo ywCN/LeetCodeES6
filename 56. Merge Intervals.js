@@ -44,4 +44,27 @@ const merge = intervals => {
   }
   return res;
 };
+
+/**
+ * variant 1: input is unsorted and has overlapping intervals, output is total non-overlapping time
+ * total non-overlapping time is the total time after merging
+ */
+const totalTime = intervals => {
+  // O(NlogN) Time.
+  if (!intervals || !intervals.length < 1) return 0; // ask input
+  intervals.sort((a, b) => a.start - b.start);
+  let total = 0;
+  let prev = new Interval(0, 0); // zero length interval to init
+  for (let cur of intervals) {
+    if (prev.end < cur.start) {
+      total += cur.end - cur.start; // add the whole part(non-overlapping)
+      prev = cur;
+    } else if (cur.end > prev.end) {
+      total += cur.end - prev.end; // only add the non overlapping part after prev.end
+      prev = cur;
+    }
+  }
+  return total;
+};
+
 // new file: 4/2/2018
