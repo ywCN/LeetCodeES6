@@ -56,5 +56,17 @@ const insert = (intervals, newInterval) => {
  * @param {Interval} newInterval
  * @return {Interval[]}
  */
-const insertB = (intervals, newInterval) => {};
+const insertB = (intervals, newInterval) => {
+  let i = 0;
+  while (i < intervals.length && intervals[i].end < newInterval.start) {
+    i++;
+  }
+  while (i < intervals.length && intervals[i].start <= newInterval.end) {
+    const overlap = intervals.splice(i, 1)[0]; // index, number of removing elements, always returns an array
+    newInterval.start = Math.min(overlap.start, newInterval.start);
+    newInterval.end = Math.max(overlap.end, newInterval.end);
+  }
+  intervals.splice(i, 0, newInterval);
+  return intervals;
+};
 // new file: 4/3/2018
