@@ -65,6 +65,7 @@ const uniquePathsWithObstaclesB = grid => {
       if (grid[i][j] === 1) {
         path[j] = 0;
       } else if (j > 0) {
+        // merge states
         path[j] = path[j] + path[j - 1];
       }
     }

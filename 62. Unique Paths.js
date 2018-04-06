@@ -56,6 +56,7 @@ const uniquePathsB = (m, n) => {
   }
   for (let i = 1; i < m; i++) {
     for (let j = 1; j < n; j++) {
+      // merge states
       path[j] = path[j] + path[j - 1]; // path[j] = up + left // path[j] is up because it is old from last loop
     }
   }
