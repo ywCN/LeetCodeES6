@@ -16,7 +16,7 @@
 
 /**
  * DP. Modified uniquePath1 solution.
- * @param {number[][]} obstacleGrid
+ * @param {number[][]} grid
  * @return {number}
  */
 const uniquePathsWithObstacles = grid => {
@@ -28,12 +28,12 @@ const uniquePathsWithObstacles = grid => {
   for (let i = 0; i < m; i++) {
     path.push(new Array(n).fill(0));
   }
-  // build first row // && grid[0][i] === 0 is to stop filling 1 when encounting an obstacle
+  // build first row // Note grid[0][i] // && grid[0][i] === 0 is to stop filling 1 when encounting an obstacle
   for (let i = 0; i < n && grid[0][i] === 0; i++) {
     path[0][i] = 1;
   }
-  // build first col
-  for (let i = 0; i < m && grid[0][i] === 0; i++) {
+  // build first col // Note grid[i][0]
+  for (let i = 0; i < m && grid[i][0] === 0; i++) {
     path[i][0] = 1;
   }
   // build rest grids
@@ -47,6 +47,29 @@ const uniquePathsWithObstacles = grid => {
     }
   }
   return path[m - 1][n - 1];
+};
+
+/**
+ * DP. 1D array. Modified uniquePath1 solution.
+ * @param {number[][]} grid
+ * @return {number}
+ */
+const uniquePathsWithObstaclesB = grid => {
+  if (!grid || !grid.length || !grid[0].length) return 0;
+  const m = grid.length;
+  const n = grid[0].length;
+  const path = new Array(n).fill(0);
+  path[0] = 1;
+  for (let i = 0; i < m; i++) {
+    for (let j = 0; j < n; j++) {
+      if (grid[i][j] === 1) {
+        path[j] = 0;
+      } else if (j > 0) {
+        path[j] = path[j] + path[j - 1];
+      }
+    }
+  }
+  return path[n - 1]; // NOT m-1
 };
 
 // new file: 4/5/2018
