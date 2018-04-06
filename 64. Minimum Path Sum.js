@@ -41,9 +41,22 @@ const minPathSum = grid => {
 };
 
 /**
+ * Brute Force. Time: O(2^(m+n)) Space:O(m+n)
+ * The Brute Force approach involves recursion.
+ * For each element, we consider two paths, rightwards and downwards and find the minimum sum out of those two.
+ * It specifies whether we need to take a right step or downward step to minimize the sum.
  * @param {number[][]} grid
  * @return {number}
  */
-const minPathSumB = grid => {};
+const minPathSumB = grid => {
+  return calculate(grid, 0, 0);
+};
+const calculate = (grid, i, j) => {
+  if (i === grid.length || j === grid[0].length) return ~(1 << 31);
+  if (i === grid.length - 1 && j === grid[0].length - 1) return grid[i][j];
+  return (
+    grid[i][j] + Math.min(calculate(grid, i + 1, j), calculate(grid, i, j + 1))
+  );
+};
 
 // new file: 4/5/2018
