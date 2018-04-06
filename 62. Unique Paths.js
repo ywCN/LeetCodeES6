@@ -20,50 +20,46 @@
  * @return {number}
  */
 const uniquePaths = (m, n) => {
-  const grid = [];
+  const path = [];
+  // build table
   for (let i = 0; i < m; i++) {
-    grid.push(new Array(n)); // build rows
+    path.push(new Array(n));
   }
-
+  // build first row
   for (let i = 0; i < n; i++) {
-    grid[0][i] = 1; // build first row
+    path[0][i] = 1;
   }
-
+  // build first col
   for (let i = 0; i < m; i++) {
-    grid[i][0] = 1; // build first col
+    path[i][0] = 1;
   }
-
+  // build rest grids
   for (let i = 1; i < m; i++) {
     for (let j = 1; j < n; j++) {
-      grid[i][j] = grid[i - 1][j] + grid[i][j - 1];
+      path[i][j] = path[i - 1][j] + path[i][j - 1];
     }
   }
-
-  return grid[m - 1][n - 1];
+  return path[m - 1][n - 1];
 };
 
 /**
  * DP. 1D array
- * in this line: dp[j] += dp[j - 1]; That's mean's add it's up num and left num.
- * just like path[i][j] = path[i-1][j] + path[i][j-1]:
- * path[i-1][j] is up num.
- * path[i][j-1] is left num.
  * @param {number} m - row
  * @param {number} n - col
  * @return {number}
  */
 const uniquePathsB = (m, n) => {
   if (!m || !n) return 0;
-  const dp = [];
+  const path = [];
   for (let i = 0; i < n; i++) {
-    dp[i] = 1;
+    path[i] = 1;
   }
   for (let i = 1; i < m; i++) {
     for (let j = 1; j < n; j++) {
-      dp[j] = dp[j] + dp[j - 1]; // dp[j] = up + left // dp[j] is up because it is old from last loop
+      path[j] = path[j] + path[j - 1]; // path[j] = up + left // path[j] is up because it is old from last loop
     }
   }
-  return dp[n - 1];
+  return path[n - 1];
 };
 
 // new file: 4/5/2018
