@@ -42,6 +42,28 @@ const uniquePaths = (m, n) => {
   return grid[m - 1][n - 1];
 };
 
-const uniquePathsB = (m, n) => {};
+/**
+ * DP. 1D array
+ * in this line: dp[j] += dp[j - 1]; That's mean's add it's up num and left num.
+ * just like path[i][j] = path[i-1][j] + path[i][j-1]:
+ * path[i-1][j] is up num.
+ * path[i][j-1] is left num.
+ * @param {number} m - row
+ * @param {number} n - col
+ * @return {number}
+ */
+const uniquePathsB = (m, n) => {
+  if (!m || !n) return 0;
+  const dp = [];
+  for (let i = 0; i < n; i++) {
+    dp[i] = 1;
+  }
+  for (let i = 1; i < m; i++) {
+    for (let j = 1; j < n; j++) {
+      dp[j] = dp[j] + dp[j - 1]; // dp[j] = up + left // dp[j] is up because it is old from last loop
+    }
+  }
+  return dp[n - 1];
+};
 
 // new file: 4/5/2018
