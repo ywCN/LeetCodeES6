@@ -63,4 +63,31 @@ const groupAnagramsB = strs => {
   return [...groups.values()];
 };
 
+/**
+ * use [] to make a key instead of Map
+ * hash+counting sort: O(mn) time, O(m) space, m is the num of strs, n is the length of strs
+ * @param {string[]} strs
+ * @return {string[][]}
+ */
+const groupAnagramsC = strs => {
+  const groups = new Map();
+  for (let str of strs) {
+    // count chars in current string
+    const count = new Array(26).fill(0);
+    for (let char of str) {
+      const charIndex = char.charCodeAt(0) - 'a'.charCodeAt(0);
+      count[charIndex]++;
+    }
+    // make a key for current string (anagram will have same key)
+    const key = count.join('');
+
+    // put key and current string in map
+    if (!groups.has(key)) {
+      groups.set(key, []); // init container
+    }
+    groups.get(key).push(str);
+  }
+  return [...groups.values()];
+};
+
 // new file: 4/1/2018
