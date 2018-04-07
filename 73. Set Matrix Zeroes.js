@@ -44,4 +44,7 @@ const setZeroes = matrix => {
     }
   }
 };
+
+// Can use extra 2 arrays to mark rows and cols. But it will use O(m+n) space.
+
 // new file: 4/6/2018
