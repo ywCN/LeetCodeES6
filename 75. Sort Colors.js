@@ -15,7 +15,7 @@
  * Could you come up with an one-pass algorithm using only constant space?
  */
 /**
- * Two passes. O(n) time O(1) space but write a lot
+ * Two passes. Counting sort. O(n) time O(1) space but write a lot.
  * if given string, change it to char[]
  * @param {number[]} nums
  * @return {void} Do not return anything, modify nums in-place instead.
@@ -48,7 +48,32 @@ const sortColors = nums => {
  * @param {number[]} nums
  * @return {void} Do not return anything, modify nums in-place instead.
  */
-const sortColorsB = nums => {};
+const sortColorsB = nums => {
+  if (!nums || nums.length === 1) return;
+  let start = 0; // end of sorted part from start
+  let end = nums.length - 1; // start of sorted part from end
+  let i = 0; // check unsorted part
+  while (i <= end) {
+    // not i < end eg[1,0]; not start < end;
+    if (nums[i] === 0) {
+      swap(nums, i, start); // swap 0 to end of sorted part
+      start++;
+      i++; // i++ for start stops at the sorted part of 0's right index
+    } else if (nums[i] === 1) {
+      i++; // skip 1
+    } else {
+      // nums[i] == 2
+      swap(nums, i, end);
+      end--;
+      // we can't i++ cuz we don't know what we swapped from right pointer, so we still need to check later
+    }
+  }
+};
+const swap = (nums, i, j) => {
+  let temp = nums[i];
+  nums[i] = nums[j];
+  nums[j] = temp;
+};
 /**
  * variant: sort k colors
  * naive:counting sort(O(n) time, need O(k) space, but can be stable if use same idea above)
@@ -56,5 +81,38 @@ const sortColorsB = nums => {};
  * @param {number[]} nums
  * @return {void} Do not return anything, modify nums in-place instead.
  */
-const sortKColors = nums => {};
+
+// below code is broken, but the thought is correct
+// const sortKColors = (nums, k) => {
+//   if (!nums || nums.length <= 1 || k === 1) return;
+//   let left = 0; // left sorted part's right boundary
+//   let right = nums.length - 1; // right sorted part's left boundary
+//   while (left < right) {
+//     let max = ~(1 << 31); // current max in current boundary
+//     let min = 1 << 31; // current min in current boundary
+//     for (let i = left; i <= right; i++) {
+//       // find max and min in current boundary
+//       max = Math.max(max, nums[i]);
+//       min = Math.min(min, nums[i]);
+//     }
+//     let i = left; // copy left
+//     while (i <= right) {
+//       if (nums[i] === min) {
+//         swap(nums, i, left);
+//         left++;
+//         i++;
+//       } else if (nums[i] > min && nums[i] < max) {
+//         // skip rest for now
+//         i++;
+//       } else {
+//         // nums[i] == max
+//         swap(nums, i, right);
+//         right--;
+//       }
+//     }
+//   }
+// };
+
+// console.log(sortKColors([5, 1, 2, 3, 4, 5, 2, 3, 2, 2, 3, 3, 2, 4], 5));
+
 // new file: 4/7/2018
