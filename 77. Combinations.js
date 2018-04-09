@@ -22,6 +22,7 @@
  */
 const combine = (n, k) => {
   const res = [];
+
   const backtrack = (temp, start) => {
     if (temp.length === k) {
       res.push([...temp]);
@@ -33,6 +34,7 @@ const combine = (n, k) => {
       temp.pop();
     }
   };
+
   backtrack([], 1); // 1 ... n
   return res;
 };
