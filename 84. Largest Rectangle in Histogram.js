@@ -42,7 +42,34 @@ const largestRectangleArea = heights => {
   }
   return max;
 };
+/**
+ * Brute Force. Time: O(n^3). Space: O(1)
+ * Consider every possible pair of bars and find the area of the rectangle
+ * formed between them using the height of the shortest bar lying between them
+ * as the height and the spacing between them as the width of the rectangle.
+ * We can thus, find the required rectangle with the maximum area.
+ * @param {number[]} heights
+ * @return {number}
+ */
+const largestRectangleAreaB = heights => {
+  let max = 0;
+  for (let i = 0; i < heights.length; i++) {
+    for (let j = i; j < heights.length; j++) {
+      let minheight = ~(1 << 31);
+      for (let k = i; k <= j; k++) minheight = Math.min(minheight, heights[k]);
+      max = Math.max(max, minheight * (j - i + 1));
+    }
+  }
+  return max;
+};
 
 console.log(largestRectangleArea([2, 1, 5, 6, 2, 3]));
+console.log(largestRectangleAreaB([2, 1, 5, 6, 2, 3]));
+
+console.log(largestRectangleArea([1, 7, 8, 5, 6, 10, 11, 8]));
+console.log(largestRectangleAreaB([1, 7, 8, 5, 6, 10, 11, 8]));
+
+console.log(largestRectangleArea([6, 7, 5, 2, 4, 5, 9, 3]));
+console.log(largestRectangleAreaB([6, 7, 5, 2, 4, 5, 9, 3]));
 
 // new file: 4/10/2018
