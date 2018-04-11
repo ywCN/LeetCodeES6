@@ -38,7 +38,7 @@ Given two strings s1 and s2 of the same length, determine if s2 is a scrambled s
  */
 
 /**
- * Time: < O(n^4)
+ * Time: < O(n^4) exponential complexity, something like O(3^n)
  * The 1st IF is to check the LEFT child of S1 is scramble of LEFT child of S2
  *      AND RIGHT child of S1 is also a scramble of RIGHT child of s2.
  * When this fails, it means the left and right substrings are swapped.
