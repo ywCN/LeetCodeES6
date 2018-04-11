@@ -28,6 +28,13 @@ const deleteDuplicates = head => {
     cur.next = nextNode; // connect to skip dup nodes except the last one
     cur = cur.next; // move forward cur to continue parsing
   }
+  // another way //
+  // while (cur) {
+  //   while (cur.next && cur.val == cur.next.val) {
+  //     cur.next = cur.next.next; // keep moving cur.next as a node
+  //   }
+  //   cur = cur.next;
+  // }
   return head;
 };
 
