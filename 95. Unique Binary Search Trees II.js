@@ -33,7 +33,8 @@ const generate = (start, end) => {
   const res = [];
   for (let i = start; i <= end; i++) {
     // generate left and right nodes, note i is not included because it is the root of current BST
-    // recall the concept of the BST, and start-end is like a sorted array, this is like DivideAndConquer
+    // recall the concept of the BST, and start-end is like a sorted array
+    // i will divide the array into left and right subtrees, this is like DivideAndConquer
     const leftNodes = generate(start, i - 1);
     const rightNodes = generate(i + 1, end);
     // build current BSTs //
