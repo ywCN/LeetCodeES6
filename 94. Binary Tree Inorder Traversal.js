@@ -38,4 +38,24 @@ const inorderTraversal = root => {
   return res;
 };
 
+/**
+ * recursion solution
+ * @param {TreeNode} root
+ * @return {number[]}
+ */
+const inorderTraversalB = root => {
+  const res = [];
+
+  const helper = cur => {
+    if (cur) {
+      if (cur.left) helper(cur.left);
+      res.push(cur.val);
+      if (cur.right) helper(cur.right);
+    }
+  };
+
+  helper(root);
+  return res;
+};
+
 // new file: 4/13/2018
