@@ -56,4 +56,32 @@ const isInterleave = (s1, s2, s3) => {
   return dp[s1.length][s2.length];
 };
 
+/**
+ * recursive with memo. Time: O(m*n) Space: O(m*n)
+ * https://discuss.leetcode.com/topic/31991/1ms-tiny-dfs-beats-94-57
+ * @param {string} s1
+ * @param {string} s2
+ * @param {string} s3
+ * @return {boolean}
+ */
+const isInterleaveB = (s1, s2, s3) => {
+  if (s1.length + s2.length !== s3.length) return false;
+  const invalid = [];
+  for (let i = 0; i < s1.length + 1; i++) {
+    invalid.push(new Array(s2.length + 1).fill(false));
+  }
+  // all are valid at this moment
+  const dfs = (i, j, k) => {
+    if (invalid[i][j]) return false;
+    if (k === s3.length) return true; // index = length means passing all tests
+    const valid =
+      (i < s1.length && s1[i] === s3[k] && dfs(i + 1, j, k + 1)) ||
+      (j < s2.length && s2[j] === s3[k] && dfs(i, j + 1, k + 1));
+    if (!valid) invalid[i][j] = true; // mark not valid
+    return valid;
+  };
+
+  return dfs(0, 0, 0);
+};
+
 // new file: 4/13/2018
