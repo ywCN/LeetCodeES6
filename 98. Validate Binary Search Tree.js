@@ -65,4 +65,20 @@ const isValidBSTB = root => {
   return true;
 };
 
+/**
+ * use Infinity and -Infinity to decrease the range
+ * @param {TreeNode} root
+ * @return {boolean}
+ */
+const isValidBSTC = root => {
+  return helper(root, Infinity, -Infinity);
+};
+
+const helper = (cur, max, min) => {
+  if (!cur) return true;
+  // the current node should be the max for left subtree and min for the right subtree
+  if (cur.val >= max || cur.val <= min) return false; // this should not happen to a BST,
+  return helper(cur.left, cur.val, min) && helper(cur.right, max, cur.val); // left subtree's max should be cur.val, right subtree's min should be cur.val
+};
+
 // new file: 4/14/2018
