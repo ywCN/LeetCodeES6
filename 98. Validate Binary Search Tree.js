@@ -12,6 +12,12 @@
  * | 2   3
  * Binary tree [1,2,3], return false.
  */
+class TreeNode {
+  constructor(val) {
+    this.val = val;
+    this.left = this.right = null;
+  }
+}
 /**
  * Recursive inorder traversal.
  * generate a list for a binary tree.
@@ -34,6 +40,29 @@ const isValidBST = root => {
     if (list[i - 1] >= list[i]) return false; // assumed no equal
   }
   return true; // pass all tests
+};
+
+/**
+ * Iterative inorder traversal. O(n) time  O(n) space for worst case(skewed trees)
+ * @param {TreeNode} root
+ * @return {boolean}
+ */
+const isValidBSTB = root => {
+  if (!root) return true;
+  const stack = [];
+  let cur = root; // copy for readability
+  let pre = null; // previous node
+  while (cur || stack.length) {
+    while (cur) {
+      stack.push(cur);
+      cur = cur.left;
+    }
+    cur = stack.pop(); // current node
+    if (pre && cur.val <= pre.val) return false; // list.add() if need a list
+    pre = cur; // update pre node
+    cur = cur.right; // update current
+  }
+  return true;
 };
 
 // new file: 4/14/2018
