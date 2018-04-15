@@ -22,6 +22,7 @@ class TreeNode {
   }
 }
 /**
+ * BFS
  * @param {TreeNode} root
  * @return {number[][]}
  */
@@ -40,6 +41,26 @@ const levelOrder = root => {
     }
     res.push(level);
   }
+  return res;
+};
+
+/**
+ * DFS
+ * @param {TreeNode} root
+ * @return {number[][]}
+ */
+const levelOrderB = root => {
+  const res = [];
+
+  const dfs = (cur, level) => {
+    if (!cur) return;
+    if (level >= res.length) res.push([]); // make sure container for each level is available
+    res[level].push(cur.val);
+    dfs(cur.left, level + 1);
+    dfs(cur.right, level + 1);
+  };
+
+  dfs(root, 0);
   return res;
 };
 
