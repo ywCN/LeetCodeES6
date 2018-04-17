@@ -46,7 +46,7 @@ const isPalindrome = s => {
 const isPalindromeB = s => {
   let parsed = s.replace(/[^A-Z0-9a-z]/g, '').toLowerCase();
   // empty -> rtn true
-  if (parsed.length < 2) return true;
+  if (parsed.length < 2) return true; // ask for this condition
   // compare last and first until middle (math floor len/2), rtn false if no match
   for (let i = 0, j = parsed.length - 1; i < j; i++, j--) {
     if (parsed[i] !== parsed[j]) {
@@ -58,6 +58,9 @@ const isPalindromeB = s => {
 };
 
 console.log(isPalindrome('A man, a plan, a canal: Panama'));
-console.log(isPalindrome('abc'));
+console.log(isPalindrome('a b;c,b a'));
+
+console.log(isPalindromeB('A man, a plan, a canal: Panama'));
+console.log(isPalindromeB('a b;c,b a'));
 
 // new file: 4/17/2018
