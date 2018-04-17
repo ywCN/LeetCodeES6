@@ -62,9 +62,45 @@ const flatten = root => {
 };
 
 /**
+ * Recursive.
+ * Suppose flatten already works.
+ * The result is flatten the left subtree, then the right subtree.
+ * Then set root.right to left subtree and connect the tail with right subtree.
+ * Remember to set root.left to null.
  * @param {TreeNode} root
  * @return {void} Do not return anything, modify root in-place instead.
  */
-const flatten = root => {};
+const flattenB = root => {
+  if (!root) return;
+  flattenB(root.left);
+  flattenB(root.right);
+  const cache = root.right;
+  root.right = root.left;
+  root.left = null; // IMPORTANT! Set left child to null to disconnect.
+  let cur = root;
+  while (cur.right) {
+    cur = cur.right;
+  }
+  cur.right = cache;
+};
+
+/**
+ * Stack.
+ * @param {TreeNode} root
+ * @return {void} Do not return anything, modify root in-place instead.
+ */
+const flatten = root => {
+  if (!root) return;
+  const stack = [root];
+  while (stack.length) {
+    let cur = stack.pop();
+    if (cur.right) stack.push(cur.right);
+    if (cur.left) stack.push(cur.left);
+    if (stack.length) {
+      cur.right = stack[stack.length - 1];
+    }
+    cur.left = null;
+  }
+};
 
 // new file: 4/17/2018
