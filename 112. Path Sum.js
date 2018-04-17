@@ -31,7 +31,7 @@ const hasPathSum = (root, sum) => {
   if (!root) return false; // encountering null node
   if (!root.left && !root.right && sum === root.val) return true; // encountering leaf
   return (
-    hasPathSum(root.left, sum - root.val) ||
+    hasPathSum(root.left, sum - root.val) || // sum - root.val because we need to see its remain
     hasPathSum(root.right, sum - root.val)
   );
 };
