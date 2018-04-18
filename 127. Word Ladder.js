@@ -21,7 +21,16 @@
  * You may assume beginWord and endWord are non-empty and are not the same.
  */
 /**
+ * BFS.
  * const res = String.fromCharCode(97); // 'a'
+ * 
+ * 因为要求最短路径，如果我们用深度优先搜索的话必须遍历所有的路径才能确定哪个是最短的，
+ *  而用广度优先搜索的话，一旦搜到目标就可以提前终止了，而且根据广度优先的性质，
+ * 我们肯定是先通过较短的路径搜到目标。另外，为了避免产生环路和重复计算，我们找到一个存在于字典的新的词时，
+ * 就要把它从字典中移去。这么做是因为根据广度优先，我们第一次发现词A的路径一定是从初始词到词A最短的路径，
+ * 对于其他可能再经过词A的路径，我们都没有必要再计算了。
+ * 
+ * 就是图里面找两个点的最近距离。
  * @param {string} beginWord
  * @param {string} endWord
  * @param {string[]} wordList
