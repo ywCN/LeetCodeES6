@@ -44,7 +44,7 @@ const isPalindrome = s => {
  * @return {boolean}
  */
 const isPalindromeB = s => {
-  let parsed = s.replace(/[^A-Z0-9a-z]/g, '').toLowerCase();
+  let parsed = s.replace(/[^A-Z0-9a-z]/g, '').toLowerCase(); // The g after the regular expression is an option or flag that performs a global search, looking in the whole string and returning all matches.
   // empty -> rtn true
   if (parsed.length < 2) return true; // ask for this condition
   // compare last and first until middle (math floor len/2), rtn false if no match
